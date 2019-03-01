@@ -35,8 +35,8 @@ export class EquipmentBase {
         return this.observator.asObservable();
     }
 
-    public get() {
-        return this.hełmy[0];
+    public getRandom(slot: string) {
+        return this[slot][Math.floor(Math.random() * this[slot].length)];
     }
 
 }

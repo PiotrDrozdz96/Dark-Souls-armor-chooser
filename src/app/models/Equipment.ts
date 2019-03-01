@@ -23,7 +23,15 @@ export class Equipment {
         });
     }
 
-    obrPerWaga(): number {
-        return (this.Fiz + this.Mag + this.Ogn + this.Błysk) / this.Waga;
+    public ochrona(): number {
+        return this.Fiz + this.Mag + this.Ogn + this.Błysk;
+    }
+
+    public ochrPerWaga(): number {
+        return this.ochrona() / this.Waga;
+    }
+
+    public show(): string {
+        return this.Nazwa + ', Ochrona: ' + this.ochrona() + ', Waga: ' + this.Waga + '. Ochr/Waga: ' + this.ochrPerWaga();
     }
 }
