@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "typescript": "^3.1.6",
+    "xlsx-to-json": "0.3.0",
+    "rxjs": "^6.3.3"
+  },
+  "devDependencies": {
+    "ts-node": "^4.1.0",
+    "tslint": "~5.9.1"
+  }
+}
