@@ -12,19 +12,23 @@ export class EquipmentBase {
 
     private observator = new BehaviorSubject<boolean>(false);
 
-    constructor(folder: string) {
-        this.openXlsx(folder, 'hełmy');
-        this.openXlsx(folder, 'nogawice');
-        this.openXlsx(folder, 'rękawice');
-        this.openXlsx(folder, 'zbroje');
+    constructor(folder: string, sets?: Array<string>) {
+        this.openXlsx(folder, 'hełmy', sets);
+        this.openXlsx(folder, 'nogawice', sets);
+        this.openXlsx(folder, 'rękawice', sets);
+        this.openXlsx(folder, 'zbroje', sets);
     }
 
-    private async openXlsx(folder: string, file: string) {
+    private async openXlsx(folder: string, file: string, sets?: Array<string>) {
         xlsxj({
             input: 'assets/' + folder + '/' + file + '.xlsx',
             output: null
         }, (err, result) => {
             this[file] = result.map(equipment => new Equipment(equipment));
+            if (sets) {
+                const tempBase = sets.map(setName => this[file].find(equipment => equipment['Nazwa zestawu zbroi'] === setName));
+                this[file] = tempBase.filter(equipment => equipment !== undefined);
+            }
             if (Object.values(this).every(value => value !== undefined)) {
                 this.observator.next(true);
             }
