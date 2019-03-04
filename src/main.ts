@@ -2,10 +2,12 @@ import { EquipmentBase } from './app/equipment-base';
 import { Population } from './app/Population';
 import { ArmorSet } from './app/ArmorSet';
 
-const evolutionNumber = 100;
 const populationSize = 100;
 const selectionSize = 5;
 const numberOfEvolution = 100;
+const maxWeight = 27;
+const armorType = 'basic';
+const mainParam = 'Main';
 
 const myArmorSets = [
     'Pusty',
@@ -24,8 +26,7 @@ const myArmorSets = [
     'Zestaw Artoriasa'
 ];
 
-const base = new EquipmentBase('basic', 'Main', myArmorSets);
-const maxWeight = 27;
+const base = new EquipmentBase(armorType, mainParam);
 
 let population: Population;
 
