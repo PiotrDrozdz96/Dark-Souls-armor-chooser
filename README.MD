@@ -17,5 +17,9 @@ All requirements are in the package.json
 * myArmorSets is Array with your set names
 * base = new EquipmentBase(armorType, mainParam, myArmorSets) --> myArmorSets is optional, without this application will searching all armor sets
 
+### About data
+* all data and set names you find in src/assets/(basic|upgrade)/*.xlsx
+* data does not contain armos with durability of less than 200 
+
 ### Running
 in src directory 'ts-node main.ts', or use another typescript compiler and runner
