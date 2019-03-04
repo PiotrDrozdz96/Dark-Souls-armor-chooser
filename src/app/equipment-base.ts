@@ -1,7 +1,7 @@
 import * as xlsxj from 'xlsx-to-json';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Equipment } from './models/Equipment';
+import { Equipment, EqArg } from './Equipment';
 
 export class EquipmentBase {
 
@@ -12,19 +12,26 @@ export class EquipmentBase {
 
     private observator = new BehaviorSubject<boolean>(false);
 
-    constructor(folder: string, sets?: Array<string>) {
-        this.openXlsx(folder, 'hełmy', sets);
-        this.openXlsx(folder, 'nogawice', sets);
-        this.openXlsx(folder, 'rękawice', sets);
-        this.openXlsx(folder, 'zbroje', sets);
+    constructor(folder: string, egArg: EqArg, sets?: Array<string>) {
+        this.openXlsx(folder, 'hełmy', egArg, sets);
+        this.openXlsx(folder, 'nogawice', egArg, sets);
+        this.openXlsx(folder, 'rękawice', egArg, sets);
+        this.openXlsx(folder, 'zbroje', egArg, sets);
     }
 
-    private async openXlsx(folder: string, file: string, sets?: Array<string>) {
+    private async openXlsx(folder: string, file: string, eqArg: EqArg, sets?: Array<string>) {
         xlsxj({
             input: 'assets/' + folder + '/' + file + '.xlsx',
             output: null
         }, (err, result) => {
-            this[file] = result.map(equipment => new Equipment(equipment));
+            this[file] = result.map(equipment => {
+                if (eqArg === 'Main') {
+                    equipment.Main = equipment.Fiz + equipment.Mag + equipment.Ogn + equipment.Błysk;
+                } else {
+                    equipment.Main = equipment[eqArg];
+                }
+                return new Equipment(equipment);
+            });
             if (sets) {
                 const tempBase = sets.map(setName => this[file].find(equipment => equipment['Nazwa zestawu zbroi'] === setName));
                 this[file] = tempBase.filter(equipment => equipment !== undefined);

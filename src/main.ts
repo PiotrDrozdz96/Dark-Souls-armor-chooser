@@ -1,6 +1,6 @@
 import { EquipmentBase } from './app/equipment-base';
-import { Population } from './app/models/Population';
-import { ArmorSet } from './app/models/ArmorSet';
+import { Population } from './app/Population';
+import { ArmorSet } from './app/ArmorSet';
 
 const evolutionNumber = 100;
 const populationSize = 100;
@@ -9,18 +9,23 @@ const numberOfEvolution = 100;
 
 const myArmorSets = [
     'Pusty',
+    'Balderski zestaw',
     'Szkarłatne szaty',
-    'Zestaw Wiedźmy',
     'Zestaw Tunelarza',
     'Zestaw Havela',
     'Zestaw srebrnego rycerza',
     'Hełm Gargulca',
     'Hełm Dzika',
-    'Symbol Skąpstwa'
+    'Symbol Skąpstwa',
+    'Zestaw strażnika',
+    'Szaty obszyte złotem',
+    'Zestaw Giganta',
+    'Zestaw Smougha',
+    'Zestaw Artoriasa'
 ];
 
-const base = new EquipmentBase('upgrade');
-const maxWeight = 25.45;
+const base = new EquipmentBase('basic', 'Main', myArmorSets);
+const maxWeight = 27;
 
 let population: Population;
 

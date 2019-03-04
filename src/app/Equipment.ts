@@ -1,3 +1,6 @@
+export type EqArg = 'Fiz' | 'Mag' | 'Ogn' | 'Błysk' | 'Równow' | 'Krwaw' | 'Truciz' | 'Kląt' | 'Main';
+
+
 export class Equipment {
     'Nazwa': string;
     'Wytrzymałość': number;
@@ -10,6 +13,7 @@ export class Equipment {
     'Krwaw': number;
     'Truciz': number;
     'Kląt': number;
+    'Main': number;
     'Nazwa zestawu zbroi': string;
 
     constructor(equipment) {

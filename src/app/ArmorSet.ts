@@ -1,4 +1,4 @@
-import { EquipmentBase } from '../equipment-base';
+import { EquipmentBase } from './equipment-base';
 import { Equipment } from './Equipment';
 
 export class ArmorSet {
@@ -73,6 +73,10 @@ export class ArmorSet {
 
     public ochrPerWaga(): number {
         return (this.hełm.ochrPerWaga() + this.nogawice.ochrPerWaga() + this.rękawice.ochrPerWaga() + this.zbroja.ochrPerWaga()) / 4;
+    }
+
+    public getMain(): number {
+        return this.hełm.Main + this.nogawice.Main + this.rękawice.Main + this.zbroja.Main;
     }
 
     public show(): void {

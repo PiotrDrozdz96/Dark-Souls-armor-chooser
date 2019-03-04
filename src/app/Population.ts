@@ -1,5 +1,5 @@
 import { ArmorSet } from './ArmorSet';
-import { EquipmentBase } from '../equipment-base';
+import { EquipmentBase } from './equipment-base';
 
 export class Population {
 
@@ -32,8 +32,8 @@ export class Population {
             const min = Math.min(...this.population.map(set => set.waga()));
             return this.population[this.population.findIndex(set => set.waga() === min)];
         } else {
-            const max = Math.max(...filtered.map(set => set.ochrona()));
-            return filtered[filtered.findIndex(set => set.ochrona() === max)];
+            const max = Math.max(...filtered.map(set => set.getMain()));
+            return filtered[filtered.findIndex(set => set.getMain() === max)];
         }
     }
 
