@@ -16,12 +16,17 @@ export class Equipment {
     'Main': number;
     'Nazwa zestawu zbroi': string;
 
-    constructor(equipment) {
+    constructor(equipment, eqArg) {
         Object.keys(equipment).forEach(key => {
             if (key !== 'Nazwa' && key !== 'Nazwa zestawu zbroi') {
                 this[key] = Number(equipment[key]);
             } else {
                 this[key] = equipment[key];
+            }
+            if (eqArg === 'Main') {
+                this.Main = equipment.Fiz + equipment.Mag + equipment.Ogn + equipment.Błysk;
+            } else {
+                this.Main = equipment[eqArg];
             }
 
         });

@@ -12,25 +12,21 @@ export class EquipmentBase {
 
     private observator = new BehaviorSubject<boolean>(false);
 
-    constructor(folder: string, egArg: EqArg, sets?: Array<string>) {
-        this.openXlsx(folder, 'hełmy', egArg, sets);
-        this.openXlsx(folder, 'nogawice', egArg, sets);
-        this.openXlsx(folder, 'rękawice', egArg, sets);
-        this.openXlsx(folder, 'zbroje', egArg, sets);
+    constructor(folder: string, private eqArg: EqArg, sets?: Array<string>) {
+
+        this.openXlsx(folder, 'hełmy', sets);
+        this.openXlsx(folder, 'nogawice', sets);
+        this.openXlsx(folder, 'rękawice', sets);
+        this.openXlsx(folder, 'zbroje', sets);
     }
 
-    private async openXlsx(folder: string, file: string, eqArg: EqArg, sets?: Array<string>) {
+    private async openXlsx(folder: string, file: string, sets?: Array<string>) {
         xlsxj({
             input: 'assets/' + folder + '/' + file + '.xlsx',
             output: null
         }, (err, result) => {
             this[file] = result.map(equipment => {
-                if (eqArg === 'Main') {
-                    equipment.Main = equipment.Fiz + equipment.Mag + equipment.Ogn + equipment.Błysk;
-                } else {
-                    equipment.Main = equipment[eqArg];
-                }
-                return new Equipment(equipment);
+                return new Equipment(equipment, this.eqArg);
             });
             if (sets) {
                 const tempBase = sets.map(setName => this[file].find(equipment => equipment['Nazwa zestawu zbroi'] === setName));
@@ -47,7 +43,7 @@ export class EquipmentBase {
     }
 
     public getRandom(slot: string) {
-        return this[slot][Math.floor(Math.random() * this[slot].length)];
+        return new Equipment (this[slot][Math.floor(Math.random() * this[slot].length)], this.eqArg);
     }
 
 }
